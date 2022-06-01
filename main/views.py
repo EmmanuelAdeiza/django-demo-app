@@ -8,7 +8,6 @@ from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from .serializers import *
-from rest_framework.permissions import AllowAny, IsAuthenticated
 
 
 from .forms import *
@@ -107,8 +106,7 @@ class PostViewSet(viewsets.ModelViewSet):
         )
         post.save()
         return Response({"message": "Post succesfully created", "status": True}, status=201)
-    # @action(methods=["POST"], detail=False, permission_classes = [AllowAny])
-    @action(methods=["POST"], detail=False, )
+    @action(methods=["POST"], detail=False,permission_classes=[AllowAny])
     def filter_post(self, request):
         search_text = request.data.get("search_text")
         paginator = ResultsPagination()
